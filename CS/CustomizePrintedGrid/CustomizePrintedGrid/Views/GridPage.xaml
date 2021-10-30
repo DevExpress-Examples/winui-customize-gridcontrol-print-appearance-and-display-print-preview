@@ -1,0 +1,38 @@
+﻿<Page
+    x:Class="CustomizePrintedGrid.GridPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dxg="using:DevExpress.WinUI.Grid"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    mc:Ignorable="d">
+    <Grid RowDefinitions="Auto,*">
+        <HyperlinkButton
+            HorizontalAlignment="Center"
+            Click="HyperlinkButton_Click"
+            Content="Show Print Preview" />
+        <dxg:GridControl
+            x:Name="gridcontrol"
+            Grid.Row="1"
+            AutoGenerateColumns="False"
+            ItemsSource="{x:Bind ViewModel.Products}"
+            PrintTotalSummary="False"
+            ShowTotalSummary="True">
+            <dxg:GridControl.Columns>
+                <dxg:GridTextColumn FieldName="ProductName" />
+                <dxg:GridTextColumn FieldName="Country" />
+                <dxg:GridTextColumn FieldName="City" />
+                <dxg:GridTextColumn FieldName="Quantity">
+                    <dxg:GridTextColumn.PrintCellStyle>
+                        <dxg:GridPrintBrickStyle Background="LightSeaGreen" FontWeight="Bold" />
+                    </dxg:GridTextColumn.PrintCellStyle>
+                </dxg:GridTextColumn>
+                <dxg:GridTextColumn x:Name="unitPrice" FieldName="UnitPrice" />
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.TotalSummary>
+                <dxg:GridSummaryItem FieldName="Quantity" SummaryType="Sum" />
+            </dxg:GridControl.TotalSummary>
+        </dxg:GridControl>
+    </Grid>
+</Page>
